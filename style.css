@@ -36,13 +36,11 @@ body{
 
 ::selection{ background: var(--gold); color: var(--void); }
 
-#scene{
+#scene {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  z-index: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
 #vignette{
@@ -65,19 +63,15 @@ main{ position: relative; z-index: 2; }
 
 .hero{ align-items: flex-end; padding-bottom: 12vh; }
 
-.panel-inner{
-  max-width: var(--measure);
-  background: var(--night);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  padding: 44px 48px;
-  box-shadow: 0 30px 80px -30px #000000aa;
+.panel-inner {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .6s ease, transform .6s ease;
+}
 
-  opacity: 0;
-  transform: translateY(28px);
-  transform: translateY(0);
+.panel-inner.in-view {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .eyebrow{

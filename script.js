@@ -1,6 +1,9 @@
 import * as THREE from "three";
 
 const canvas = document.getElementById("scene");
+if (!canvas) {
+  throw new Error('Canvas element with id="scene" not found. Load the script after the canvas or wrap initialization in DOMContentLoaded.');
+}
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -138,7 +141,12 @@ function constellationPoint(t) {
     Math.sin(angle) * r * 0.6
   );
 }
- 
+
+const STAR_COUNT = 200;
+const scatterPositions = [];
+const constellationPositions = [];
+const starPositions = [];
+
 for (let i = 0; i < STAR_COUNT; i++) {
   scatterPositions.push(
     (Math.random() - 0.5) * 46,
